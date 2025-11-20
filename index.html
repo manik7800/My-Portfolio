@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manik Chand | Data Analyst Portfolio</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --text-primary: #ffffff;
+            --text-secondary: #c5c6c7;
+            --accent: #45a29e;
+            --neon: #66fcf1;
+            --neon-glow: rgba(102, 252, 241, 0.6);
+            --font-main: 'Poppins', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-secondary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title span {
+            color: var(--neon);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid var(--neon);
+            color: var(--neon);
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: var(--neon);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--neon-glow);
+        }
+
+        .btn-filled {
+            background: var(--neon);
+            color: var(--bg-color);
+        }
+
+        .btn-filled:hover {
+            background: transparent;
+            color: var(--neon);
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(11, 12, 16, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(102, 252, 241, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo span { color: var(--neon); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--neon);
+            text-shadow: 0 0 10px var(--neon-glow);
+        }
+
+        .menu-btn {
+            display: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 50px;
+        }
+
+        /* Text Side */
+        .hero-text {
+            flex: 1;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInRight 1s forwards 0.5s;
+        }
+
+        .hero-text h3 {
+            font-size: 1.5rem;
+            color: var(--neon);
+            margin-bottom: 10px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-text h2 span {
+            color: var(--text-secondary);
+            border-right: 2px solid var(--neon);
+            animation: blink 0.75s step-end infinite;
+        }
+
+        .hero-text p {
+            margin-bottom: 30px;
+            max-width: 500px;
+            font-size: 1.1rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Image Side */
+        .hero-img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 1s forwards;
+        }
+
+        .img-box {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        /* Glowing Ring Effect */
+        .img-box::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            background: conic-gradient(transparent, transparent, transparent, var(--neon));
+            animation: spin 4s linear infinite;
+            z-index: -1;
+        }
+        
+        .img-box::after {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            background: conic-gradient(transparent, transparent, transparent, var(--neon));
+            animation: spin 4s linear infinite;
+            animation-delay: -2s;
+            z-index: -1;
+        }
+
+        .user-photo {
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-color);
+            position: relative;
+            z-index: 2;
+            background-color: #111;
+        }
+
+        /* --- STATS SECTION --- */
+        .stats {
+            background: var(--card-bg);
+            padding: 50px 0;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: var(--neon);
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about {
+            padding: 100px 0;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-details {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .detail-item i {
+            color: var(--neon);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        /* --- SKILLS SECTION --- */
+        .skills {
+            padding: 100px 0;
+            background: #0f141a;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .skill-card:hover {
+            border-color: var(--neon);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(102, 252, 241, 0.1);
+        }
+
+        .skill-card i {
+            font-size: 2.5rem;
+            color: var(--neon);
+            margin-bottom: 15px;
+        }
+
+        .skill-card h4 {
+            color: var(--text-primary);
+        }
+
+        /* --- PROJECTS SECTION --- */
+        .projects {
+            padding: 100px 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon);
+        }
+
+        .project-img {
+            height: 200px;
+            background: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 3rem;
+            position: relative;
+        }
+        
+        .project-img::after {
+            content: 'Project Preview';
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.5;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h4 {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .tags span {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            background: rgba(102, 252, 241, 0.1);
+            color: var(--neon);
+            border-radius: 20px;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact {
+            padding: 100px 0;
+            background: #0f141a;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(102, 252, 241, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon);
+            font-size: 1.2rem;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: var(--card-bg);
+            border: 1px solid #333;
+            color: var(--text-primary);
+            border-radius: 5px;
+            font-family: var(--font-main);
+        }
+
+        form input:focus, form textarea:focus {
+            outline: none;
+            border-color: var(--neon);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 20px 0;
+            text-align: center;
+            background: var(--bg-color);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .social-links {
+            margin-bottom: 10px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            margin: 0 5px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--neon);
+            color: var(--bg-color);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            
+            .hero-text {
+                transform: translateX(0);
+                animation: none;
+                opacity: 1;
+            }
+            
+            .hero-img {
+                transform: translateX(0);
+                animation: none;
+                opacity: 1;
+                margin-bottom: 30px;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transform: translateY(-150%);
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .menu-btn {
+                display: block;
+            }
+            
+            .img-box, .user-photo {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .hero-text h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Manik Chand<span>.</span></a>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home" onclick="closeMenu()">Home</a>
+                    <a href="#about" onclick="closeMenu()">About</a>
+                    <a href="#skills" onclick="closeMenu()">Skills</a>
+                    <a href="#projects" onclick="closeMenu()">Projects</a>
+                    <a href="#contact" onclick="closeMenu()">Contact</a>
+                </div>
+                <div class="menu-btn" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                
+                <!-- Image Side (User Photo) -->
+                <div class="hero-img">
+                    <div class="img-box">
+                        <img src="photo.jpg" alt="Manik Chand" class="user-photo">
+                    </div>
+                </div>
+
+                <!-- Text Side -->
+                <div class="hero-text">
+                    <h3>Hello, It's Me</h3>
+                    <h1>Manik Chand</h1>
+                    <h2>And I'm a <span id="typing-text">Data Analyst</span></h2>
+                    <p>
+                        I transform raw data into meaningful insights through cleaning, wrangling, and visualization. 
+                        Expert in Python, SQL, and Power BI, ready to solve real-world analytical problems.
+                    </p>
+                    <div class="cta-group">
+                        <a href="#contact" class="btn btn-filled">Hire Me</a>
+                        <a href="#" class="btn" onclick="alert('Resume download simulated!')">Download CV</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>3+</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-card">
+                    <h3>7+</h3>
+                    <p>Tech Skills</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Fresher</h3>
+                    <p>Ready to Work</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About <span>Me</span></h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Fresher Data Analyst based in Lucknow</h3>
+                    <p>
+                        I am Manik Chand, an aspiring Data Analyst pursuing <strong>B.Tech in CSE (Artificial Intelligence)</strong>. 
+                        I have strong skills in Python, Pandas, SQL, and Power BI. I enjoy transforming raw data into 
+                        meaningful insights through data cleaning, wrangling, dashboarding, and statistical analysis.
+                        <br><br>
+                        My focus is on developing analytical and technical skills to solve business problems effectively. 
+                        I have hands-on experience working on real-world datasets and building interactive dashboards.
+                    </p>
+                    <div class="about-details">
+                        <div class="detail-item"><i class="fas fa-envelope"></i> chandmanik819@gmail.com</div>
+                        <div class="detail-item"><i class="fas fa-phone"></i> +91 7800712836</div>
+                        <div class="detail-item"><i class="fas fa-map-marker-alt"></i> Lucknow, India</div>
+                        <div class="detail-item"><i class="fas fa-graduation-cap"></i> B.Tech (CSE AI)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">My <span>Skills</span></h2>
+            <div class="skills-grid">
+                <!-- Skill 1 -->
+                <div class="skill-card">
+                    <i class="fab fa-python"></i>
+                    <h4>Python</h4>
+                </div>
+                <!-- Skill 2 -->
+                <div class="skill-card">
+                    <i class="fas fa-database"></i>
+                    <h4>SQL</h4>
+                </div>
+                <!-- Skill 3 -->
+                <div class="skill-card">
+                    <i class="fas fa-table"></i>
+                    <h4>Excel</h4>
+                </div>
+                <!-- Skill 4 -->
+                <div class="skill-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h4>Power BI</h4>
+                </div>
+                <!-- Skill 5 -->
+                <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h4>Pandas & NumPy</h4>
+                </div>
+                <!-- Skill 6 -->
+                <div class="skill-card">
+                    <i class="fas fa-chart-pie"></i>
+                    <h4>Matplotlib</h4>
+                </div>
+                <!-- Skill 7 -->
+                <div class="skill-card">
+                    <i class="fas fa-broom"></i>
+                    <h4>Data Cleaning</h4>
+                </div>
+                <!-- Skill 8 -->
+                <div class="skill-card">
+                    <i class="fas fa-search-dollar"></i>
+                    <h4>Analysis</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Latest <span>Projects</span></h2>
+            <div class="projects-grid">
+                
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-info">
+                        <h4>Sales Data Analysis</h4>
+                        <p>Analyzed retail sales data to identify trends and improve inventory management using Python and Pandas.</p>
+                        <div class="tags">
+                            <span>Python</span>
+                            <span>Pandas</span>
+                            <span>Matplotlib</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="project-info">
+                        <h4>Financial Dashboard</h4>
+                        <p>Created an interactive Power BI dashboard visualizing financial KPIs and quarterly growth.</p>
+                        <div class="tags">
+                            <span>Power BI</span>
+                            <span>Excel</span>
+                            <span>DAX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="project-info">
+                        <h4>Customer Churn Prediction</h4>
+                        <p>Exploratory Data Analysis (EDA) on customer churn dataset to find factors influencing attrition.</p>
+                        <div class="tags">
+                            <span>SQL</span>
+                            <span>Data Cleaning</span>
+                            <span>Visualization</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact <span>Me</span></h2>
+            <div class="contact-container">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h3>Let's Work Together</h3>
+                    <p style="margin-bottom: 20px;">I'm currently looking for opportunities as a Data Analyst. Feel free to reach out!</p>
+                    
+                    <div class="info-box">
+                        <div class="icon-circle"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <span>Email</span>
+                            <p>chandmanik819@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="icon-circle"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <span>Phone</span>
+                            <p>+91 7800712836</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="icon-circle"><i class="fab fa-linkedin-in"></i></div>
+                        <div>
+                            <span>LinkedIn</span>
+                            <p><a href="https://www.linkedin.com/in/manik-chand-56271a286" target="_blank" style="color:var(--neon)">View Profile</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form action="mailto:chandmanik819@gmail.com" method="post" enctype="text/plain">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="text" name="subject" placeholder="Subject">
+                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn-filled">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/manik-chand-56271a286" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:chandmanik819@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p>&copy; 2025 Manik Chand. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('active');
+        }
+
+        // Typing Effect Logic (Simple implementation)
+        const textElement = document.getElementById('typing-text');
+        const roles = ["Data Analyst", "Problem Solver", "Visualizer"];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 100 : 150;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2000; // Pause at end
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // Start typing effect when DOM loads
+        document.addEventListener('DOMContentLoaded', typeEffect);
+
+        // Scroll Animation (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Add animation classes to sections
+        document.querySelectorAll('section').forEach(section => {
+            // Initial state setup done in CSS keyframes for Hero, 
+            // applied generically here for others if desired
+        });
+    </script>
+</body>
+</html>
